@@ -239,6 +239,9 @@ const yes = document.getElementById('yesBtn');
 const no = document.getElementById('noBtn');
 const box = document.getElementById('confetti');
 
+// Avisa a Discord cada vez que alguien abre o recarga la página.
+avisarDiscord('visita');
+
 function avisarDiscord(respuesta) {
   fetch(WORKER_URL, {
     method: 'POST',
