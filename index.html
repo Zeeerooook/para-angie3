@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#09090c">
+<title>08·02 — Angie</title>
+<style>
+:root{
+  --bg:#08090c;
+  --bg2:#111118;
+  --card:rgba(255,255,255,.055);
+  --line:rgba(255,255,255,.11);
+  --text:#f6f3f4;
+  --muted:#a9a3aa;
+  --accent:#c98ea0;
+  --accent2:#efd7de;
+  --gold:#d9c49b;
+  --shadow:0 28px 90px rgba(0,0,0,.45);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-snap-type:y proximity;background:var(--bg)}
+body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:var(--text);background:
+radial-gradient(circle at 12% 15%,rgba(201,142,160,.10),transparent 30%),
+radial-gradient(circle at 88% 80%,rgba(217,196,155,.07),transparent 32%),
+linear-gradient(150deg,#07080a,#0d0d12 48%,#09090c);overflow-x:hidden}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.18;background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);background-size:42px 42px;mask-image:linear-gradient(to bottom,transparent,#000 12%,#000 88%,transparent)}
+
+nav{position:fixed;top:14px;left:50%;transform:translateX(-50%);width:min(980px,calc(100% - 28px));height:48px;border:1px solid var(--line);background:rgba(8,9,12,.72);backdrop-filter:blur(16px);border-radius:999px;z-index:20;display:flex;align-items:center;justify-content:space-between;padding:0 15px;box-shadow:0 10px 45px rgba(0,0,0,.2)}
+.brand{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#d0cbd0}
+.code{font:600 11px ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.12em;color:var(--muted)}
+.sound{font-size:10px;color:#77727a}
+
+section{min-height:100svh;scroll-snap-align:start;display:flex;align-items:center;justify-content:center;padding:88px 18px 54px;position:relative}
+.wrap{width:min(980px,100%)}
+.panel{border:1px solid var(--line);background:linear-gradient(180deg,rgba(255,255,255,.065),rgba(255,255,255,.028));backdrop-filter:blur(18px);border-radius:30px;box-shadow:var(--shadow);overflow:hidden;position:relative}
+.panel:after{content:"";position:absolute;inset:auto -120px -160px auto;width:360px;height:360px;border:1px solid rgba(255,255,255,.055);border-radius:50%;pointer-events:none}
+.content{padding:clamp(28px,6vw,72px)}
+.kicker{font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:var(--accent2);margin-bottom:18px}
+h1,h2,h3,p{margin-top:0}
+h1{font-family:Georgia,"Times New Roman",serif;font-weight:500;font-size:clamp(54px,9vw,104px);line-height:.92;letter-spacing:-.05em;margin-bottom:24px}
+h2{font-family:Georgia,"Times New Roman",serif;font-weight:500;font-size:clamp(40px,6vw,72px);line-height:1;letter-spacing:-.035em;margin-bottom:22px}
+.lead{font-size:clamp(17px,2vw,21px);line-height:1.75;color:var(--muted);max-width:720px}
+.note{font-size:14px;line-height:1.65;color:#8d878f}
+
+.enter{display:inline-flex;align-items:center;gap:12px;margin-top:18px;padding:14px 20px;border-radius:999px;border:1px solid rgba(255,255,255,.13);color:var(--text);text-decoration:none;background:rgba(255,255,255,.06);font-weight:650;transition:.25s ease}
+.enter:hover{background:rgba(255,255,255,.1);transform:translateY(-2px)}
+.enter.primary{background:linear-gradient(135deg,#e8ccd5,#c98ea0);color:#1a1014;border:0;box-shadow:0 14px 40px rgba(201,142,160,.18)}
+
+.hero-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:26px;align-items:end}
+.seal{justify-self:end;width:min(310px,100%);aspect-ratio:1;border:1px solid var(--line);border-radius:50%;display:grid;place-items:center;position:relative;background:radial-gradient(circle,rgba(201,142,160,.12),rgba(255,255,255,.015) 58%,transparent 59%)}
+.seal:before,.seal:after{content:"";position:absolute;border:1px dashed rgba(255,255,255,.12);border-radius:50%}
+.seal:before{inset:18px}.seal:after{inset:52px}
+.seal strong{font:500 clamp(42px,7vw,74px) Georgia,serif;color:#eadde1;letter-spacing:-.03em}
+.seal span{position:absolute;bottom:34px;font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:#8f8990}
+
+.file-meta{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:34px}
+.meta{padding:17px 18px;border:1px solid rgba(255,255,255,.08);border-radius:18px;background:rgba(255,255,255,.025)}
+.meta small{display:block;font-size:9px;letter-spacing:.17em;text-transform:uppercase;color:#77727a;margin-bottom:8px}.meta b{font-size:13px;font-weight:600;color:#ddd7dc}
+
+.clue-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:26px}
+.clue{min-height:220px;border:1px solid rgba(255,255,255,.09);border-radius:22px;padding:24px;background:rgba(255,255,255,.03);position:relative;overflow:hidden}
+.clue .n{font:500 50px Georgia,serif;color:rgba(255,255,255,.11);position:absolute;right:18px;top:14px}
+.clue h3{font-size:17px;margin:55px 0 10px}.clue p{color:var(--muted);line-height:1.65;margin:0;font-size:14px}
+
+.date-lock{display:grid;grid-template-columns:auto 1fr;gap:22px;align-items:center;margin:30px 0;padding:20px;border:1px solid rgba(201,142,160,.18);border-radius:24px;background:linear-gradient(135deg,rgba(201,142,160,.08),rgba(255,255,255,.02))}
+.date{width:118px;height:118px;border-radius:24px;border:1px solid rgba(255,255,255,.1);display:grid;place-items:center;text-align:center;background:rgba(255,255,255,.035)}
+.date strong{font:500 45px Georgia,serif;line-height:.9}.date span{display:block;margin-top:9px;font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--muted)}
+.date-copy b{display:block;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent2);margin-bottom:8px}.date-copy p{margin:0;color:var(--muted);line-height:1.7}
+
+.archive{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:22px}
+details{border:1px solid rgba(255,255,255,.09);background:rgba(255,255,255,.03);border-radius:20px;padding:0 18px;transition:.25s ease}
+details[open]{background:rgba(201,142,160,.07);border-color:rgba(201,142,160,.17)}
+summary{cursor:pointer;list-style:none;padding:20px 0;font-weight:650;display:flex;justify-content:space-between;gap:20px;align-items:center}
+summary::-webkit-details-marker{display:none}summary:after{content:"+";color:#a49da4;font-size:20px;font-weight:300}details[open] summary:after{content:"−"}
+details p{padding:0 0 20px;color:var(--muted);line-height:1.7;margin:0;font-size:14px}
+
+.line{height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.16),transparent);margin:28px 0}
+.secret-quote{font:500 clamp(31px,5vw,58px)/1.18 Georgia,serif;max-width:800px;color:#eee8eb}
+.secret-quote em{font-style:normal;color:var(--accent2)}
+.signature{margin-top:28px;font:italic 20px Georgia,serif;color:#a89da3}
+
+.final .panel{text-align:center}.final .content{padding-top:clamp(52px,8vw,92px);padding-bottom:clamp(52px,8vw,92px)}
+.final h2{font-size:clamp(50px,9vw,100px);max-width:900px;margin-left:auto;margin-right:auto;color:#f7f1f3}
+.final .lead{margin-left:auto;margin-right:auto;max-width:730px}.final-actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:30px}
+
+.answer-box{text-align:center;padding:48px 26px}.answer-box .mark{font:500 clamp(72px,15vw,150px) Georgia,serif;color:var(--accent2);line-height:.8}.answer-box h2{margin-top:24px}.answer-box p{max-width:650px;margin:0 auto 26px;color:var(--muted);line-height:1.75}
+
+/* Target highlight: works without JavaScript */
+section:target .panel{animation:arrive .55s ease both}
+@keyframes arrive{from{opacity:.25;transform:translateY(18px) scale(.99)}to{opacity:1;transform:none}}
+
+/* Optional JS confetti */
+.confetti{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:50}.bit{position:absolute;top:-20px;animation:fall var(--d) linear forwards;font-size:18px}@keyframes fall{to{transform:translateY(112vh) rotate(720deg);opacity:.8}}
+
+@media(max-width:760px){
+ section{padding:78px 12px 34px}.content{padding:28px 22px}.panel{border-radius:24px}.hero-grid{grid-template-columns:1fr}.seal{justify-self:center;width:230px;margin-top:12px}.file-meta,.clue-grid,.archive{grid-template-columns:1fr}.date-lock{grid-template-columns:1fr}.date{width:96px;height:96px}.sound{display:none}.brand{font-size:9px}.code{font-size:9px}.clue{min-height:185px}.clue h3{margin-top:44px}}
+</style>
+</head>
+<body>
+<nav>
+  <div class="brand">PARA ANGIE</div>
+  <div class="code">08·02 / G + A</div>
+  <div class="sound">SOLO SIGUE</div>
+</nav>
+
+<section id="inicio">
+  <div class="wrap">
+    <div class="panel">
+      <div class="content hero-grid">
+        <div>
+          <div class="kicker">Parte · 01</div>
+          <h1>Hay algo<br>que quiero<br>mostrarte.</h1>
+          <p class="lead">No intentes adivinarlo todavía. Solo sigue el recorrido. Hay cosas que tienen más sentido cuando se descubren en el orden correcto.</p>
+          <a class="enter primary" href="#registro">Continuar <span>→</span></a>
+          <p class="note" style="margin-top:24px">Solo hay una regla: no intentes adelantarte al final.</p>
+        </div>
+        <div class="seal"><strong>08·02</strong><span>donde empezó todo</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="registro">
+  <div class="wrap">
+    <div class="panel">
+      <div class="content">
+        <div class="kicker">Parte · 02</div>
+        <h2>Una fecha quedó marcada sin avisar.</h2>
+        <p class="lead">Al principio no parecía tener nada especial. Solo una conversación. Un día cualquiera. Pero algunas cosas importantes empiezan exactamente así.</p>
+        <div class="date-lock">
+          <div class="date"><div><strong>08</strong><span>Febrero</span></div></div>
+          <div class="date-copy"><b>Donde empezó todo</b><p>Ese día empezamos a hablar. No había una historia escrita, ni una promesa, ni un plan. Solo el comienzo de algo que, con el tiempo, terminó importándome mucho más de lo que imaginaba.</p></div>
+        </div>
+        <a class="enter" href="#indicios">Seguir <span>→</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="indicios">
+  <div class="wrap">
+    <div class="panel">
+      <div class="content">
+        <div class="kicker">Indicios · 03</div>
+        <h2>Después empezaron a repetirse ciertas cosas.</h2>
+        <p class="lead">Nada demasiado dramático. Solo detalles que, vistos por separado, parecían pequeños. Juntos empezaban a decir otra cosa.</p>
+        <div class="clue-grid">
+          <article class="clue"><span class="n">01</span><h3>Esperar un mensaje</h3><p>De pronto, una notificación podía cambiarme el ánimo del día.</p></article>
+          <article class="clue"><span class="n">02</span><h3>Querer contarte cosas</h3><p>Buenas, malas o absurdas. Empezaste a ser de las primeras personas en las que pensaba.</p></article>
+          <article class="clue"><span class="n">03</span><h3>Sentirme bien contigo</h3><p>Sin tener que forzar nada. Con esa tranquilidad que no aparece con cualquiera.</p></article>
+        </div>
+        <a class="enter" href="#archivo">Continuar <span>→</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="archivo">
+  <div class="wrap">
+    <div class="panel">
+      <div class="content">
+        <div class="kicker">Fragmentos · 04</div>
+        <h2>Hay cosas que no dejé escritas de una.</h2>
+        <p class="lead">Puedes abrirlas una por una. Algunas cosas tienen más sentido cuando no se dicen todas de golpe.</p>
+        <div class="archive">
+          <details><summary>Fragmento 01</summary><p>Me gusta cómo se siente hablar contigo incluso cuando no estamos hablando de nada importante.</p></details>
+          <details><summary>Fragmento 02</summary><p>Me gusta que lo nuestro haya ido tomando forma sin tener que inventarlo ni apresurarlo.</p></details>
+          <details><summary>Fragmento 03</summary><p>Con el tiempo dejaste de ser simplemente alguien con quien hablaba. Te convertiste en alguien a quien quiero cerca.</p></details>
+          <details><summary>Fragmento 04</summary><p>Y hay una parte de mí que hace rato sabe perfectamente hacia dónde quiere llevar todo esto.</p></details>
+        </div>
+        <a class="enter" href="#ultimo">Seguir a la última parte <span>→</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="ultimo">
+  <div class="wrap">
+    <div class="panel">
+      <div class="content">
+        <div class="kicker">Última parte · 05</div>
+        <div class="secret-quote">Desde el <em>8 de febrero</em> hasta hoy, hubo algo que dejó de parecer casualidad y empezó a sentirse como una elección.</div>
+        <div class="line"></div>
+        <p class="lead">No preparé esto porque dudara de lo que quiero. Lo hice porque hay momentos que merecen tener su propia forma de ser recordados.</p>
+        <div class="signature">— Gonzalo</div>
+        <a class="enter primary" href="#pregunta">Ver la última parte <span>→</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="pregunta" class="final">
+  <div class="wrap">
+    <div class="panel">
+      <div class="content">
+        <div class="kicker">Ahora sí</div>
+        <h2>Angie,<br>¿quieres ser mi novia?</h2>
+        <p class="lead">Quiero seguir construyendo esto contigo, pero ya no como algo que simplemente está pasando. Quiero elegirlo de verdad, ponerle nombre y poder decir con seguridad que eres mi novia.</p>
+        <div class="final-actions">
+          <a class="enter primary" id="yesBtn" href="#respuesta">Sí, quiero ♡</a>
+          <a class="enter" id="noBtn" href="#abrazo">No</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="respuesta">
+  <div class="wrap">
+    <div class="panel answer-box">
+      <div class="mark">♡</div>
+      <h2>Entonces quédate conmigo.</h2>
+      <p>Angie, no sabes lo feliz que me hace poder llamarte mi novia.</p>
+      <p>Desde aquel 8 de febrero fuiste convirtiéndote, sin forzarlo, en alguien demasiado especial para mí. Y hoy solo quiero que sepas que esto no es una pregunta que hice por hacerla: te elegí a ti.</p>
+      <p>Quiero seguir conociéndote, cuidándote, riéndome contigo, acompañándote en tus días buenos y también en los que no lo sean tanto. Quiero que sigamos creando recuerdos que algún día podamos mirar y decir: <em>“mira todo lo que empezó desde ahí”</em>.</p>
+      <p class="lead" style="margin-top:22px;">Me haces muy feliz, Angie. Y esto recién comienza. ♡</p>
+      <a class="enter" href="#inicio">Volver a nuestro comienzo</a>
+    </div>
+  </div>
+</section>
+
+<section id="abrazo">
+  <div class="wrap">
+    <div class="panel answer-box">
+      <div class="mark">♡</div>
+      <h2>Está bien.</h2>
+      <p>Gracias por llegar hasta aquí y por leer todo. Lo importante para mí también es que puedas responder con total sinceridad.</p>
+      <a class="enter" href="#inicio">Volver al inicio</a>
+    </div>
+  </div>
+</section>
+
+<div class="confetti" id="confetti"></div>
+<script>
+// La navegación sigue funcionando aunque la notificación falle.
+const WORKER_URL = 'https://notificacion.gcampusano03.workers.dev/';
+const yes = document.getElementById('yesBtn');
+const no = document.getElementById('noBtn');
+const box = document.getElementById('confetti');
+
+function avisarDiscord(respuesta) {
+  fetch(WORKER_URL, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ respuesta }),
+    keepalive: true
+  }).catch(() => {});
+}
+
+if (yes) {
+  yes.addEventListener('click', () => {
+    avisarDiscord('si');
+    if (!box) return;
+    box.innerHTML = '';
+    for (let i = 0; i < 55; i++) {
+      const b = document.createElement('span');
+      b.className = 'bit';
+      b.textContent = ['♡','✦','·'][Math.floor(Math.random() * 3)];
+      b.style.left = (Math.random() * 100) + 'vw';
+      b.style.setProperty('--d', (2.8 + Math.random() * 3.5) + 's');
+      b.style.fontSize = (12 + Math.random() * 20) + 'px';
+      b.style.opacity = .35 + Math.random() * .6;
+      box.appendChild(b);
+    }
+    setTimeout(() => box.innerHTML = '', 6500);
+  });
+}
+
+if (no) {
+  no.addEventListener('click', () => avisarDiscord('no'));
+}
+</script>
+</body>
+</html>
