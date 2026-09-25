@@ -93,6 +93,11 @@ section:target .panel{animation:arrive .55s ease both}
 /* Optional JS confetti */
 .confetti{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:50}.bit{position:absolute;top:-20px;animation:fall var(--d) linear forwards;font-size:18px}@keyframes fall{to{transform:translateY(112vh) rotate(720deg);opacity:.8}}
 
+/* Las respuestas permanecen fuera del recorrido hasta que se elige una opción */
+.answer-section{display:none}
+.answer-section.revealed{display:flex}
+.question-hidden{display:none}
+
 @media(max-width:760px){
  section{padding:78px 12px 34px}.content{padding:28px 22px}.panel{border-radius:24px}.hero-grid{grid-template-columns:1fr}.seal{justify-self:center;width:230px;margin-top:12px}.file-meta,.clue-grid,.archive{grid-template-columns:1fr}.date-lock{grid-template-columns:1fr}.date{width:96px;height:96px}.sound{display:none}.brand{font-size:9px}.code{font-size:9px}.clue{min-height:185px}.clue h3{margin-top:44px}}
 </style>
@@ -206,7 +211,7 @@ section:target .panel{animation:arrive .55s ease both}
   </div>
 </section>
 
-<section id="respuesta">
+<section id="respuesta" class="answer-section">
   <div class="wrap">
     <div class="panel answer-box">
       <div class="mark">♡</div>
@@ -220,7 +225,7 @@ section:target .panel{animation:arrive .55s ease both}
   </div>
 </section>
 
-<section id="abrazo">
+<section id="abrazo" class="answer-section">
   <div class="wrap">
     <div class="panel answer-box">
       <div class="mark">♡</div>
@@ -238,6 +243,9 @@ const WORKER_URL = 'https://notificacion.gcampusano03.workers.dev/';
 const yes = document.getElementById('yesBtn');
 const no = document.getElementById('noBtn');
 const box = document.getElementById('confetti');
+const pregunta = document.getElementById('pregunta');
+const respuestaSi = document.getElementById('respuesta');
+const respuestaNo = document.getElementById('abrazo');
 
 // Avisa a Discord cada vez que alguien abre o recarga la página.
 avisarDiscord('visita');
@@ -251,9 +259,22 @@ function avisarDiscord(respuesta) {
   }).catch(() => {});
 }
 
+function mostrarRespuesta(seccion) {
+  // La respuesta no ocupa espacio ni puede verse haciendo scroll antes de elegir.
+  if (pregunta) pregunta.classList.add('question-hidden');
+  seccion.classList.add('revealed');
+
+  // Cambia el hash sin provocar un salto antes de revelar la sección.
+  history.replaceState(null, '', '#' + seccion.id);
+  requestAnimationFrame(() => seccion.scrollIntoView({ behavior: 'smooth', block: 'start' }));
+}
+
 if (yes) {
-  yes.addEventListener('click', () => {
+  yes.addEventListener('click', (e) => {
+    e.preventDefault();
     avisarDiscord('si');
+    mostrarRespuesta(respuestaSi);
+
     if (!box) return;
     box.innerHTML = '';
     for (let i = 0; i < 55; i++) {
@@ -271,7 +292,11 @@ if (yes) {
 }
 
 if (no) {
-  no.addEventListener('click', () => avisarDiscord('no'));
+  no.addEventListener('click', (e) => {
+    e.preventDefault();
+    avisarDiscord('no');
+    mostrarRespuesta(respuestaNo);
+  });
 }
 </script>
 </body>
